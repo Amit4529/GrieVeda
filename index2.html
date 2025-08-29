@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>GrieVeda – Smart Civic Issue Reporting</title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="description" content="Report civic issues like potholes, trash, electricity, and water problems. Track status and engage your community." />
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand" aria-label="GrieVeda Home">
+          <span class="brand-mark" aria-hidden="true">◆</span>
+          <span class="brand-text">GrieVeda</span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="report.html">Report Issue</a></li>
+            <li><a href="citizen-dashboard.html">My Complaints</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="departments.html">Departments</a></li>
+            <li><a href="track.html">Track</a></li>
+            <li><a href="admin-dashboard.html">Admin</a></li>
+          </ul>
+        </nav>
+        <div class="auth-actions">
+          <a class="btn btn-ghost" href="login.html">Login</a>
+          <a class="btn" href="register.html" data-variant="primary">Register</a>
+        </div>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">Menu</button>
+      </div>
+      <nav id="mobile-menu" class="mobile-menu" hidden aria-label="Mobile">
+        <ul>
+          <li><a href="report.html">Report Issue</a></li>
+          <li><a href="citizen-dashboard.html">My Complaints</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="departments.html">Departments</a></li>
+          <li><a href="track.html">Track</a></li>
+          <li><a href="admin-dashboard.html">Admin</a></li>
+          <li class="divider" aria-hidden="true"></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1 class="text-balance">Report civic issues in seconds. Get them to the right department.</h1>
+            <p class="lead">GrieVeda connects citizens and government to resolve potholes, garbage, power cuts, and water problems—fast and transparently.</p>
+            <div class="hero-actions">
+              <a class="btn" data-variant="primary" href="report.html">Report an Issue</a>
+              <a class="btn btn-ghost" href="citizen-dashboard.html">View My Complaints</a>
+            </div>
+            <ul class="hero-highlights" role="list">
+              <li>AI-assisted categorization</li>
+              <li>Track status: Pending → In Progress → Resolved</li>
+              <li>Department dashboards</li>
+              <li>Community upvotes</li>
+            </ul>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <img src="/placeholder.svg?height=280&width=420" alt="" />
+          </div>
+        </div>
+      </section>
+
+      <section class="quick-actions">
+        <div class="container">
+          <h2 class="section-title text-balance">What would you like to do?</h2>
+          <div class="cards">
+            <a class="card" href="report.html">
+              <h3>Report Issue</h3>
+              <p>Submit description and image. AI helps pick the category.</p>
+            </a>
+            <a class="card" href="citizen-dashboard.html">
+              <h3>My Dashboard</h3>
+              <p>See your complaint history and live status updates.</p>
+            </a>
+            <a class="card" href="track.html">
+              <h3>Track by ID</h3>
+              <p>Enter your complaint ID to check latest status.</p>
+            </a>
+            <a class="card" href="community.html">
+              <h3>Community</h3>
+              <p>View public issues and upvote recurring problems.</p>
+            </a>
+            <a class="card" href="departments.html">
+              <h3>Departments</h3>
+              <p>Know who handles electricity, water, roads, and more.</p>
+            </a>
+            <a class="card" href="admin-dashboard.html">
+              <h3>Admin / Department</h3>
+              <p>Manage assigned complaints and update status.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="assurance">
+        <div class="container grid-2">
+          <div>
+            <h2 class="section-title">Built for Citizens and Government</h2>
+            <p>Simple, transparent, and effective. GrieVeda streamlines civic issue reporting and ensures the right department sees every complaint.</p>
+            <ul class="checklist" role="list">
+              <li>Mobile-first design</li>
+              <li>Accessible and bilingual-ready</li>
+              <li>Privacy-first approach</li>
+            </ul>
+          </div>
+          <div class="assurance-card">
+            <h3>Get started now</h3>
+            <p>Create an account to submit and track your complaints.</p>
+            <a class="btn w-full" data-variant="primary" href="register.html">Create account</a>
+            <p class="muted mt-2">Already registered? <a href="login.html">Login</a></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">◆</span>
+          <span class="brand-text">GrieVeda</span>
+        </div>
+        <nav aria-label="Footer">
+          <ul class="footer-links">
+            <li><a href="departments.html">Departments</a></li>
+            <li><a href="community.html">Community</a></li>
+            <li><a href="track.html">Track</a></li>
+            <li><a href="report.html">Report</a></li>
+          </ul>
+        </nav>
+        <p class="muted">© <span id="year"></span> GrieVeda. For public service use.</p>
+      </div>
+    </footer>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>

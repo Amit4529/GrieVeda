@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin / Department Dashboard – GrieVeda</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body data-page="admin">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand"><span class="brand-mark">◆</span><span class="brand-text">GrieVeda</span></a>
+        <nav class="nav">
+          <ul class="nav-list">
+            <li><a href="departments.html">Departments</a></li>
+            <li><a href="community.html">Community</a></li>
+          </ul>
+        </nav>
+        <div class="auth-actions">
+          <a class="btn btn-ghost" href="login.html">Login</a>
+        </div>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">Menu</button>
+      </div>
+      <nav id="mobile-menu" class="mobile-menu" hidden>
+        <ul>
+          <li><a href="departments.html">Departments</a></li>
+          <li><a href="community.html">Community</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="container">
+      <div class="page-header">
+        <h1>Admin / Department Dashboard</h1>
+      </div>
+
+      <div class="filters grid">
+        <div class="field">
+          <label for="deptFilter">Department</label>
+          <select id="deptFilter">
+            <option value="">All</option>
+            <option value="Public Works">Public Works</option>
+            <option value="Sanitation Dept.">Sanitation Dept.</option>
+            <option value="Electricity Board">Electricity Board</option>
+            <option value="Water Supply">Water Supply</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="statusFilter">Status</label>
+          <select id="statusFilter">
+            <option value="">All</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table" aria-describedby="admin-help">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Department</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Updated</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTable"></tbody>
+        </table>
+      </div>
+      <p id="admin-help" class="muted">Change status to update complaint progress. This is a demo using local storage.</p>
+    </main>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>

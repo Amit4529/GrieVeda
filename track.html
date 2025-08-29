@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Track Complaint – GrieVeda</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body data-page="track">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand"><span class="brand-mark">◆</span><span class="brand-text">GrieVeda</span></a>
+        <nav class="nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="report.html">Report</a></li>
+            <li><a href="community.html">Community</a></li>
+          </ul>
+        </nav>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">Menu</button>
+      </div>
+      <nav id="mobile-menu" class="mobile-menu" hidden>
+        <ul>
+          <li><a href="report.html">Report</a></li>
+          <li><a href="community.html">Community</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="container">
+      <h1>Track Complaint</h1>
+      <form id="trackForm" class="form inline">
+        <div class="field">
+          <label for="trackId" class="sr-only">Complaint ID</label>
+          <input id="trackId" type="text" placeholder="Enter Complaint ID" required />
+        </div>
+        <button class="btn" data-variant="primary" type="submit">Track</button>
+      </form>
+
+      <div id="trackResult" class="track-result" aria-live="polite"></div>
+    </main>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>

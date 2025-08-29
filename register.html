@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Register – GrieVeda</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body data-page="register">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand"><span class="brand-mark">◆</span><span class="brand-text">GrieVeda</span></a>
+        <nav class="nav" aria-label="Primary">
+          <ul class="nav-list">
+            <li><a href="report.html">Report Issue</a></li>
+            <li><a href="community.html">Community</a></li>
+          </ul>
+        </nav>
+        <div class="auth-actions">
+          <a class="btn btn-ghost" href="login.html">Login</a>
+        </div>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">Menu</button>
+      </div>
+      <nav id="mobile-menu" class="mobile-menu" hidden>
+        <ul>
+          <li><a href="report.html">Report Issue</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li class="divider"></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="auth-main">
+      <section class="auth-card">
+        <h1>Create an account</h1>
+        <form id="registerForm" class="form">
+          <div class="grid">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="regEmail">Email</label>
+            <input id="regEmail" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="grid">
+            <div class="field">
+              <label for="regPassword">Password</label>
+              <input id="regPassword" name="password" type="password" autocomplete="new-password" required />
+            </div>
+            <div class="field">
+              <label for="regPassword2">Confirm password</label>
+              <input id="regPassword2" name="password2" type="password" autocomplete="new-password" required />
+            </div>
+          </div>
+          <button class="btn w-full" data-variant="primary" type="submit">Register</button>
+        </form>
+        <p class="muted mt-4">Already have an account? <a href="login.html">Login</a></p>
+      </section>
+    </main>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>
