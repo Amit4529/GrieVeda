@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Image & Voice Submission</title>
+    <style>
+      :root{
+        /* Color system (exactly 5 colors) */
+        --blue: #0A5EB0;     /* primary */
+        --text: #111827;     /* near-black for text */
+        --border: #E5E7EB;   /* light gray for borders */
+        --white: #FFFFFF;    /* background */
+        --bg-subtle: #F9FAFB;/* subtle section bg (derived neutral) */
+      }
+
+      /* Global */
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body{
+        margin:0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+        color: var(--text);
+        background: var(--white);
+        line-height: 1.5;
+      }
+
+      /* Layout */
+      header{
+        border-bottom: 1px solid var(--border);
+        background: var(--white);
+      }
+      .wrap{
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 16px;
+      }
+      .masthead{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 0;
+      }
+      .brand{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .brand-mark{
+        width: 36px; height: 36px; border-radius: 6px;
+        background: var(--blue);
+      }
+      .brand-title{
+        margin:0;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      main{ padding: 16px 0 32px; }
+      .section{
+        background: var(--bg-subtle);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      .section h2{
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .hint{
+        margin: 0 0 12px 0;
+        font-size: 14px;
+        color: rgba(17,24,39,0.8);
+      }
+
+      /* Forms */
+      label{
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 6px;
+      }
+      input[type="file"]{
+        display:block;
+        width: 100%;
+        padding: 8px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--white);
+      }
+      textarea{
+        width: 100%;
+        min-height: 120px;
+        resize: vertical;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font: inherit;
+        color: var(--text);
+        background: var(--white);
+      }
+      textarea:focus, input:focus, button:focus{
+        outline: 3px solid rgba(10,94,176,0.25);
+        outline-offset: 1px;
+      }
+
+      /* Buttons */
+      .row{ display:flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+      .btn{
+        appearance: none;
+        border: 1px solid var(--blue);
+        background: var(--blue);
+        color: var(--white);
+        padding: 10px 14px;
+        border-radius: 8px;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn.secondary{
+        background: var(--white);
+        color: var(--blue);
+      }
+      .btn.ghost{
+        border-color: var(--border);
+        background: var(--white);
+        color: var(--text);
+      }
+      .btn[disabled]{
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      /* Camera */
+      .camera-area{
+        display: none; /* toggled via JS */
+        gap: 12px;
+      }
+      video, canvas, img.preview{
+        display: block;
+        width: 100%;
+        max-height: 320px;
+        object-fit: contain;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--white);
+      }
+      .preview-wrap{
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 1fr;
+      }
+
+      /* Status & Result */
+      .status{
+        font-size: 14px;
+        color: rgba(17,24,39,0.8);
+      }
+      .dot{
+        display:inline-block; width:8px; height:8px; border-radius: 50%;
+        margin-right: 6px; background: var(--border);
+      }
+      .dot.live{ background: var(--blue); }
+
+      .result{
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        background: var(--white);
+        font-size: 14px;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      footer{
+        border-top:1px solid var(--border);
+        background: var(--white);
+      }
+      .foot{
+        padding: 12px 0;
+        font-size: 12px;
+        color: rgba(17,24,39,0.7);
+      }
+
+      @media (min-width: 720px){
+        .camera-area{
+          display: grid;
+          grid-template-columns: 1fr 240px;
+          align-items: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header role="banner">
+      <div class="wrap masthead">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <p class="brand-title">Government Submission Portal</p>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="wrap" role="main">
+      <p class="hint" aria-live="polite">
+        Note: Camera and microphone require a secure connection (HTTPS) and a supported device/browser.
+      </p>
+
+       Image Section 
+      <section class="section" aria-labelledby="image-section-title">
+        <h2 id="image-section-title">Attach an Image</h2>
+        <p class="hint">Choose a file, or capture a new photo from your camera.</p>
+
+        <div class="row" role="group" aria-label="Image selection controls">
+          <div style="flex:1; min-width: 240px;">
+            <label for="file-input">Upload image</label>
+            <input id="file-input" type="file" accept="image/*" capture="environment" />
+          </div>
+
+          <div class="row" style="margin-top: 6px;">
+            <button id="open-camera" class="btn" type="button" aria-pressed="false" aria-controls="camera-block">
+              Open Camera
+            </button>
+            <button id="clear-image" class="btn ghost" type="button" disabled>
+              Clear image
+            </button>
+          </div>
+        </div>
+
+        <div id="camera-block" class="camera-area" aria-hidden="true">
+          <div>
+            <video id="video" playsinline autoplay muted></video>
+            <div class="row" style="margin-top:8px">
+              <button id="capture" class="btn secondary" type="button">Capture Photo</button>
+              <button id="stop-camera" class="btn ghost" type="button">Stop Camera</button>
+            </div>
+          </div>
+          <div class="preview-wrap">
+            <canvas id="canvas" class="" hidden></canvas>
+            <img id="image-preview" class="preview" src="/placeholder.svg" alt="Selected image preview" hidden />
+          </div>
+        </div>
+      </section>
+
+       Text + Speech Section 
+      <section class="section" aria-labelledby="text-section-title">
+        <h2 id="text-section-title">Description</h2>
+        <p class="hint">Type your message or use the microphone to dictate. Your speech will be written into the box.</p>
+
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Write here..."></textarea>
+
+        <div class="row" style="margin-top:8px" role="group" aria-label="Voice dictation controls">
+          <button id="mic" class="btn secondary" type="button" aria-pressed="false">
+            Start Mic
+          </button>
+          <span class="status" id="mic-status">
+            <span id="mic-dot" class="dot" aria-hidden="true"></span>
+            Microphone is off
+          </span>
+        </div>
+      </section>
+
+       Submit Section 
+      <section class="section" aria-labelledby="submit-section-title">
+        <h2 id="submit-section-title">Submit</h2>
+        <p class="hint">When ready, submit your image and description.</p>
+
+        <div class="row">
+          <button id="submit" class="btn" type="button">Submit</button>
+          <span id="submit-status" class="status" aria-live="polite"></span>
+        </div>
+
+        <div id="result" class="result" style="margin-top:12px;" hidden></div>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <div class="wrap foot">
+        © Government of India — Secure submission interface
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+        // Elements
+        const fileInput   = document.getElementById('file-input');
+        const openBtn     = document.getElementById('open-camera');
+        const stopBtn     = document.getElementById('stop-camera');
+        const captureBtn  = document.getElementById('capture');
+        const clearBtn    = document.getElementById('clear-image');
+        const video       = document.getElementById('video');
+        const canvas      = document.getElementById('canvas');
+        const imgPreview  = document.getElementById('image-preview');
+        const cameraBlock = document.getElementById('camera-block');
+
+        const micBtn      = document.getElementById('mic');
+        const micStatus   = document.getElementById('mic-status');
+        const micDot      = document.getElementById('mic-dot');
+        const message     = document.getElementById('message');
+
+        const submitBtn   = document.getElementById('submit');
+        const submitStatus= document.getElementById('submit-status');
+        const resultBox   = document.getElementById('result');
+
+        let mediaStream = null;
+        let capturedBlob = null;  // Blob of captured image (if camera used)
+        let capturedFile = null;  // File object from file input
+        let recognition = null;
+        let recognizing = false;
+
+        // Utilities
+        function isSecure(){
+          return window.isSecureContext || location.protocol === 'https:';
+        }
+
+        function setPreviewFromFile(file){
+          if(!file) return;
+          const reader = new FileReader();
+          reader.onload = e => {
+            imgPreview.src = e.target.result;
+            imgPreview.hidden = false;
+            canvas.hidden = true;
+          };
+          reader.readAsDataURL(file);
+        }
+
+        function clearImage(){
+          capturedBlob = null;
+          capturedFile = null;
+          fileInput.value = '';
+          imgPreview.src = '';
+          imgPreview.hidden = true;
+          canvas.hidden = true;
+          clearBtn.disabled = true;
+        }
+
+        function stopCamera(){
+          if(mediaStream){
+            mediaStream.getTracks().forEach(t => t.stop());
+            mediaStream = null;
+          }
+          video.srcObject = null;
+          cameraBlock.style.display = '';
+          cameraBlock.setAttribute('aria-hidden', 'true');
+          openBtn.setAttribute('aria-pressed', 'false');
+        }
+
+        function enableMicUI(on){
+          micBtn.setAttribute('aria-pressed', String(on));
+          micBtn.textContent = on ? 'Stop Mic' : 'Start Mic';
+          micDot.classList.toggle('live', on);
+          micStatus.innerHTML = (on
+            ? '<span class="dot live" aria-hidden="true"></span>Listening...'
+            : '<span class="dot" aria-hidden="true"></span>Microphone is off');
+        }
+
+        // Image: File selection
+        fileInput.addEventListener('change', () => {
+          const file = fileInput.files && fileInput.files[0] ? fileInput.files[0] : null;
+          if(file){
+            capturedFile = file;
+            capturedBlob = null; // prefer explicit file over captured
+            setPreviewFromFile(file);
+            clearBtn.disabled = false;
+          }
+        });
+
+        // Camera: Open camera
+        openBtn.addEventListener('click', async () => {
+          if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+            alert('Camera is not supported in this browser.');
+            return;
+          }
+          if(!isSecure()){
+            alert('Camera access requires HTTPS.');
+            return;
+          }
+          try{
+            mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+            video.srcObject = mediaStream;
+            cameraBlock.style.display = 'grid';
+            cameraBlock.setAttribute('aria-hidden', 'false');
+            openBtn.setAttribute('aria-pressed', 'true');
+          }catch(err){
+            console.error(err);
+            alert('Unable to access camera. Please check permissions.');
+          }
+        });
+
+        // Camera: Capture photo
+        captureBtn.addEventListener('click', () => {
+          if(!mediaStream){
+            alert('Camera not started.');
+            return;
+          }
+          const track = mediaStream.getVideoTracks()[0];
+          const settings = track.getSettings ? track.getSettings() : {};
+          const w = settings.width || video.videoWidth || 800;
+          const h = settings.height || video.videoHeight || 600;
+
+          canvas.width = w;
+          canvas.height = h;
+
+          const ctx = canvas.getContext('2d', { willReadFrequently: true });
+          ctx.drawImage(video, 0, 0, w, h);
+
+          canvas.toBlob((blob) => {
+            if(blob){
+              capturedBlob = blob;
+              capturedFile = null; // prefer captured photo
+              // Show preview
+              imgPreview.src = URL.createObjectURL(blob);
+              imgPreview.hidden = false;
+              canvas.hidden = true;
+              clearBtn.disabled = false;
+            }else{
+              alert('Could not capture image.');
+            }
+          }, 'image/jpeg', 0.9);
+        });
+
+        // Camera: Stop
+        stopBtn.addEventListener('click', stopCamera);
+
+        // Clear image
+        clearBtn.addEventListener('click', clearImage);
+
+        // Speech Recognition setup
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if(SR){
+          recognition = new SR();
+          recognition.lang = 'en-IN'; // adjust as needed
+          recognition.continuous = true;
+          recognition.interimResults = true;
+
+          recognition.onresult = (event) => {
+            let interim = '';
+            let final = '';
+            for(let i = event.resultIndex; i < event.results.length; i++){
+              const res = event.results[i];
+              if(res.isFinal){
+                final += res[0].transcript;
+              } else {
+                interim += res[0].transcript;
+              }
+            }
+            if(final){
+              const needsSpace = message.value && !message.value.endsWith(' ') ? ' ' : '';
+              message.value += needsSpace + final.trim();
+            }
+            // Optionally show interim somewhere (not persisted)
+            micStatus.innerHTML = '<span class="dot live" aria-hidden="true"></span>' + (interim ? ('Listening… ' + interim) : 'Listening...');
+          };
+
+          recognition.onerror = (e) => {
+            console.warn('Speech error:', e.error);
+            enableMicUI(false);
+          };
+
+          recognition.onend = () => {
+            recognizing = false;
+            enableMicUI(false);
+          };
+        }else{
+          micBtn.disabled = true;
+          micStatus.textContent = 'Speech recognition is not supported in this browser.';
+        }
+
+        // Mic toggle
+        micBtn.addEventListener('click', () => {
+          if(!recognition){
+            alert('Speech recognition not supported.');
+            return;
+          }
+          if(!isSecure()){
+            alert('Microphone access requires HTTPS.');
+            return;
+          }
+          if(recognizing){
+            recognition.stop();
+            recognizing = false;
+            enableMicUI(false);
+          }else{
+            try{
+              recognition.start();
+              recognizing = true;
+              enableMicUI(true);
+            }catch(e){
+              console.error(e);
+              recognizing = false;
+              enableMicUI(false);
+            }
+          }
+        });
+
+       // Submit handler (send to Flask AI model)
+        submitBtn.addEventListener('click', async () => {
+        submitBtn.disabled = true;
+        submitStatus.textContent = 'Sending to AI model…';
+
+        try {
+            const text = (message.value || '').trim();
+
+            if (!text) {
+            submitStatus.textContent = 'Please enter or speak a message first.';
+            submitBtn.disabled = false;
+            return;
+            }
+
+            // Send request to Flask API (running at localhost:5000)
+            const response = await fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: text })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+            resultBox.hidden = false;
+            resultBox.textContent = 
+                `Your Input: ${result.input}\n\n` +
+                `Translated: ${result.translated}\n\n` +
+                `Prediction: ${result.prediction}`;
+            submitStatus.textContent = 'Prediction received!';
+            } else {
+            resultBox.hidden = false;
+            resultBox.textContent = "Error: " + (result.error || "Unknown error");
+            submitStatus.textContent = 'Failed.';
+            }
+        } catch (e) {
+            console.error(e);
+            submitStatus.textContent = 'Submission failed. Please try again.';
+        } finally {
+            submitBtn.disabled = false;
+        }
+        });
+
+
+        // Cleanup on unload
+        window.addEventListener('beforeunload', () => {
+          stopCamera();
+          if(recognizing && recognition){
+            recognition.stop();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
