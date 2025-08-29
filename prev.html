@@ -25,21 +25,11 @@
             <li><a href="admin-dashboard.html">Admin</a></li>
           </ul>
         </nav>
-        <div class="auth-actions">
-          <div style="position: relative; display: inline-block;">
-  <!-- Avatar Button -->
-  <img 
-    src="avatar.jpg" 
-    alt="Avatar" 
-    style="width:40px; height:40px; border-radius:50%; border:2px solid black; cursor:pointer;" 
-    onclick="toggleDropdown()" 
-  />
 
-  <!-- Dropdown Menu -->
-  <div id="avatarDropdown" style="display:none; position:absolute; right:0; background-color:white; min-width:120px; box-shadow:0px 8px 16px rgba(0,0,0,0.2); border-radius:5px; overflow:hidden; z-index:1;">
-    <a href="prev.html" style="color:#333; padding:10px 15px; display:block; text-decoration:none;" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">Logout</a>
-  </div>
-</div>
+
+        <div class="auth-actions">
+         <a class="btn btn-ghost" href="index.html">Login</a>
+          <a class="btn" href="index.html" data-variant="primary">Register</a>
         </div>
         <button class="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">Menu</button>
       </div>
@@ -134,22 +124,7 @@
       </div>
     </footer>
 
-<script>
-  function toggleDropdown() {
-    const dropdown = document.getElementById('avatarDropdown');
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-  }
 
-  // Close dropdown if clicked outside
-  window.onclick = function(event) {
-    if (!event.target.matches('img')) {
-      const dropdown = document.getElementById('avatarDropdown');
-      if (dropdown.style.display === 'block') {
-        dropdown.style.display = 'none';
-      }
-    }
-  }
-</script>
     <script src="assets/app.js" defer></script>
   </body>
 </html>
